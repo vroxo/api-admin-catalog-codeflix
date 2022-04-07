@@ -113,7 +113,36 @@ describe("Category Unit Tests", () => {
         data.forEach( i => {
             const category = new Category({ ...i.props }, i.id);
             expect(category.id).not.toBeNull();
-            expect(category.id).toBeInstanceOf(UniqueEntityId)
+            expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId)
         })        
+    });
+
+    test("update category", () => {
+        const arrange = { name: "Movie", description: "some description" };
+
+        const category = new Category(arrange);
+        category.update("Movie Updated", "Description Updated");
+        
+        expect(category.name).toBe("Movie Updated");
+        expect(category.description).toBe("Description Updated");
+
+    });
+
+    test("activate category", () => {
+        const arrange = { name: "Movie", description: "some description", is_active: false };
+    
+        const category = new Category(arrange);
+        category.activate();
+
+        expect(category.is_active).toBeTruthy()
+    });
+
+    test("deactive category", () => {
+        const arrange = { name: "Movie", description: "some description" };
+
+        const category = new Category(arrange);
+        category.deactivate();
+
+        expect(category.is_active).toBeFalsy();
     });
 })
