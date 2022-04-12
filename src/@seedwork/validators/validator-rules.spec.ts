@@ -26,6 +26,7 @@ function assertIsValid(expected: ExpectedRule) {
   }).not.toThrow(expected.error);
 }
 
+
 function runRule({
   value,
   property,
@@ -34,6 +35,7 @@ function runRule({
 }: Omit<ExpectedRule, "error">) {
   const validator = ValidatorRules.values(value, property);
   const method = validator[rule];
+  // @ts-ignore
   method.apply(validator, params);
 }
 describe('ValidatorRules Unit Tests.', () => {
