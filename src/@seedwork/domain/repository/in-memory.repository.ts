@@ -30,14 +30,14 @@ export abstract class InMemoryRepository<E extends Entity>
 
   async delete(id: string | uniqueEntityIdVo): Promise<void> {
     const _id = `${id}`;
-    this._get(_id);
+    await this._get(_id);
     const indexFound = this.items.findIndex(i => i.id === _id);
     this.items.splice(indexFound, 1);
   }
 
   protected async _get(id: string): Promise<E> {
     const item = this.items.find(i => i.id === id);
-    if(!item) throw new NotFoundError(`Entity not foundusinf ID ${id}.`);
+    if(!item) throw new NotFoundError(`Entity Not Found using ID ${id}`);
     
     return item;
   }

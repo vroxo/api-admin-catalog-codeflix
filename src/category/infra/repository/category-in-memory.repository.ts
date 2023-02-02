@@ -4,4 +4,8 @@ import CategoryRepositoryInterface from "../../domain/repository/category.reposi
 
 export default class CategoryInMemoryRepository 
   extends InMemorySearchableRepository<Category> 
-  implements CategoryRepositoryInterface {}
+  implements CategoryRepositoryInterface {
+  protected applyFilter(items: Category[], filter: string) {
+    throw new Error("Method not implemented.");
+  }
+}

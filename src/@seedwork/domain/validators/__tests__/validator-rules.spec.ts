@@ -1,4 +1,4 @@
-import ValidationError from "../../errors/validation.error";
+import { ValidationError } from "../../errors/validation.error";
 import ValidatorRules from "../validator-rules";
 
 type Values = {
@@ -137,7 +137,7 @@ describe('ValidatorRules Unit Tests.', () => {
       { value: "true", property: "field" },
       { value: "false", property: "field" },
     ];
-    const error = new ValidationError("The field must be a boolean");
+    const error = new ValidationError("The field must be a boolean.");
     arrange.forEach((item) => {
       assertIsInvalid({
         value: item.value,
