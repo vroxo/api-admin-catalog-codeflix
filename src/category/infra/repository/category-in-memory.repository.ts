@@ -1,11 +1,34 @@
+import { SortDirection } from "#seedwork/domain/repository/repository-contracts";
 import { InMemorySearchableRepository } from "../../../@seedwork/domain/repository/in-memory.repository";
 import { Category } from '../../domain/entities/category'
-import CategoryRepositoryInterface from "../../domain/repository/category.repository";
+import CategoryRepository from "../../domain/repository/category.repository";
 
 export default class CategoryInMemoryRepository 
   extends InMemorySearchableRepository<Category> 
-  implements CategoryRepositoryInterface {
-  protected applyFilter(items: Category[], filter: string) {
-    throw new Error("Method not implemented.");
+  implements CategoryRepository.Repository {
+
+  sortableFields: string[] = ['name', 'created_at']
+  
+  protected async applyFilter(
+    items: Category[], 
+    filter: CategoryRepository.Filter
+  ) {
+    if(!filter) return items;
+
+    return items.filter(i => {
+      return (
+        i.props.name.toLowerCase().includes(filter.toLowerCase())
+      )
+    })
+  }
+
+  protected async applySort(
+    items: Category[],
+    sort: string | null,
+    sort_dir: SortDirection | null
+  ) {
+    return !sort
+      ? super.applySort(items, 'created_at', 'desc')
+      : super.applySort(items, sort, sort_dir) 
   }
 }
