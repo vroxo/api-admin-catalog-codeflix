@@ -54,8 +54,8 @@ export abstract class InMemorySearchableRepository<E extends Entity>
     const itemsPaginated = await this.applyPaginate(itemsSorted, props.page, props.per_page);
 
     return new SearchResult({
-      items: itemsFiltered,
-      total: itemsPaginated.length,
+      items: itemsPaginated,
+      total: itemsFiltered.length,
       current_page: props.page,
       per_page: props.per_page,
       sort: props.sort,
