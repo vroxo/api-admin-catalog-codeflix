@@ -1,7 +1,7 @@
-import ClassValidatorFields from "../validators/class-validator-fields"
-import { FieldErrors } from "../validators/validator-fields-interface"
+import ClassValidatorFields from "#seedwork/domain/validators/class-validator-fields"
+import { FieldErrors } from "#seedwork/domain"
 import { objectContaining } from "expect"
-import { EntityValidationError } from "../errors/validation.error";
+import { EntityValidationError } from "#seedwork/domain";
 
 type Expected = {
     validator: ClassValidatorFields<any>,

@@ -1,4 +1,4 @@
-import { SearchParams, SearchResult } from '../repository-contracts';
+import { SearchParams, SearchResult } from '#seedwork/domain';
 
 describe("Search Unit Tests", () => {
   describe("SearchParams Unit Tests", () => {

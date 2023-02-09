@@ -1,5 +1,5 @@
-import { CategoryRepository } from "#category/domain/repository/category.repository";
-import { CategoryOutput, CategoryOutputMapper } from "#category/application/dto/category-output";
+import { CategoryRepository } from "#category/domain";
+import { CategoryOutput, CategoryOutputMapper } from "#category/application";
 import UseCase from "#seedwork/application/use-cases/use-case";
 
 export default class CreateCategoryUseCase implements UseCase<Input, Output>{

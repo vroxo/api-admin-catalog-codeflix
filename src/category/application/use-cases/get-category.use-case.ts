@@ -1,6 +1,6 @@
 import UseCase from "#seedwork/application/use-cases/use-case";
-import { CategoryRepository } from "#category/domain/repository/category.repository";
-import { CategoryOutput } from "#category/application/dto/category-output";
+import { CategoryRepository } from "#category/domain";
+import { CategoryOutput } from "#category/application";
 
 export default class GetCategoryUseCase implements UseCase<Input, Output>{
   constructor(private categoryRepo: CategoryRepository.Repository){}
