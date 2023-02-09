@@ -1,26 +1,31 @@
 import { CategoryRepository } from "../../domain/repository/category.repository";
-import { Category } from "../../domain/entities/category";
-import { CategoryOutput } from "../dto/category-output";
+import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 import UseCase from "../../../@seedwork/application/use-cases/use-case";
 
 export default class CreateCategoryUseCase implements UseCase<Input, Output>{
   constructor(private categoryRepo: CategoryRepository.Repository){}
 
   async execute(input: Input): Promise<Output> {
-    const entity = new Category(input);
-    await this.categoryRepo.insert(entity);
-    return {
-      id: entity.id,
-      name: entity.name,
-      description: entity.description,
-      is_active: entity.is_active,
-      created_at: entity.created_at
+    const entity = await this.categoryRepo.findById(input.id);
+    entity.update(input.name, input.description);
+
+    if(input.is_active === true){
+      entity.activate()
     }
+
+    if(input.is_active === false){
+      entity.deactivate()
+    }
+
+    await this.categoryRepo.update(entity);
+
+    return CategoryOutputMapper.toOutput(entity);
   }
 
 }
 
 export type Input = {
+  id: string;
   name: string;
   description?: string;
   is_active?: boolean;

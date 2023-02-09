@@ -1,6 +1,6 @@
 import { IsBoolean, IsDate, IsNotEmpty, IsOptional, IsString, MaxLength } from "class-validator";
-import ClassValidatorFields from "../../@seedwork/domain/validators/class-validator-fields";
-import { CategoryProperties } from '../domain/entities/category'
+import ClassValidatorFields from "../../../@seedwork/domain/validators/class-validator-fields";
+import { CategoryProperties } from '../../domain/entities/category'
 
 export class CategoryRules {
   @MaxLength(255)
