@@ -1,14 +1,12 @@
-import CategoryRepository from "../../domain/repository/category.repository";
-import { Category } from "../../domain/entities/category";
-import { CategoryOutput } from "../dto/category-output";
 import UseCase from "../../../@seedwork/application/use-cases/use-case";
+import CategoryRepository from "../../domain/repository/category.repository";
+import { CategoryOutput } from "../dto/category-output";
 
-export default class CreateCategoryUseCase implements UseCase<Input, Output>{
+export default class GetCategoryUseCase implements UseCase<Input, Output>{
   constructor(private categoryRepo: CategoryRepository.Repository){}
 
   async execute(input: Input): Promise<Output> {
-    const entity = new Category(input);
-    await this.categoryRepo.insert(entity);
+    const entity = await this.categoryRepo.findById(input.id);
     return {
       id: entity.id,
       name: entity.name,
@@ -17,13 +15,10 @@ export default class CreateCategoryUseCase implements UseCase<Input, Output>{
       created_at: entity.created_at
     }
   }
-
 }
 
 export type Input = {
-  name: string;
-  description?: string;
-  is_active?: boolean;
+  id: string;
 }
 
 export type Output = CategoryOutput;
