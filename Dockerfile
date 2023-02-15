@@ -1,4 +1,4 @@
-FROM node:14.15.4-slim
+FROM node:14.17.0-slim
 
 RUN mkdir -p /usr/share/man/man1 && \
     echo 'deb http://ftp.debian.org/debian stretch-backports main' | tee /etc/apt/sources.list.d/stretch-backports.list && \
@@ -10,6 +10,8 @@ RUN mkdir -p /usr/share/man/man1 && \
     curl \
     wget \
     fonts-powerline
+
+RUN npm install -g @nestjs/cli@8.2.5 npm@8.5.5
 
 ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
@@ -30,4 +32,4 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
     echo 'HISTFILE=/home/node/zsh/.zsh_history' >> ~/.zshrc 
 
-CMD [ "sh", "-c", "npm install && tail -f /dev/null" ]
+CMD [ "tail", "-f", "/dev/null" ]

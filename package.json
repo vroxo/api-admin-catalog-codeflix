@@ -1,39 +1,26 @@
 {
-  "name": "api-admin-video-catalog",
+  "name": "micro-videos",
   "version": "1.0.0",
-  "description": "Video Catalog Admin API",
+  "description": "",
   "main": "index.js",
-  "imports": {
-    "#seedwork/*": "./dist/@seedwork/*.js",
-    "#category/*": "./dist/category/*.js"
-  },
+  "workspaces": [
+    "./src/@core",
+    "./src/api"
+  ],
   "scripts": {
-    "ts-node": "ts-node",
-    "tsc": "tsc",
-    "tsc:check": "npm run tsc -- --noEmit",
-    "clean:tsc": "rm tsconfig.tsbuildinfo",
+    "prestart:dev": "npm run build -w @micro-videos/core",
+    "start:dev": "npm run build:w -w @micro-videos/core & npm run start:dev -w @micro-videos/api",
     "test": "jest",
-    "test:cov": "npm run test -- --coverage",
-    "cti": "cti",
-    "cti:make": "sh ./cti.sh"
+    "test:cov": "jest --coverage"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vroxo/api-admin-catalog-codeflix.git"
+  },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@swc/core": "^1.2.151",
-    "@swc/jest": "^0.2.20",
-    "@types/jest": "^27.4.1",
-    "@types/lodash": "^4.14.179",
-    "@types/node": "^17.0.21",
-    "create-ts-index": "^1.14.0",
-    "jest": "^27.5.1",
-    "ts-node": "^10.6.0",
-    "typescript": "^4.6.2"
+  "bugs": {
+    "url": "https://github.com/vroxo/api-admin-catalog-codeflix/issues"
   },
-  "dependencies": {
-    "@types/uuid": "^8.3.4",
-    "class-validator": "^0.13.2",
-    "uuid": "^8.3.2"
-  }
+  "homepage": "https://github.com/vroxo/api-admin-catalog-codeflix#readme"
 }
